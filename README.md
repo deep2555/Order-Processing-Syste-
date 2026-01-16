@@ -11,3 +11,47 @@ building a backend order processing system that reads orders from a file, proces
 ✔ File I/O
 ✔ Logical thinking & reasoning
 ✔ Clean code
+---
+UML Design 
++----------------+        +----------------+
+|     Order      |------->|      Item      |
++----------------+        +----------------+
+| - orderId      |        | - itemId       |
+| - quantity     |        | - itemName     |
+| - item         |        +----------------+
++----------------+        | +getItemId()   |
+| +getOrderId()  |        | +getItemName() |
+| +getItem()     |        | +equals()      |
+| +getQuantity() |        | +hashCode()    |
++----------------+        +----------------+
+
+        ^
+        |  - - - - - - - - - - - - - -
+        |        (dependency)
++----------------+
+|   Inventory    |◇-----------------> Item
++----------------+
+| - stockMap     |
++----------------+
+| +checkAndUpdateStock(order: Order) : OrderResult |
++----------------+
+
++----------------+
+|  OrderResult   |--------> Order
++----------------+
+| - orderId      |
+| - status       |
+| - reason       |
++----------------+
+| +getOrderId()  |
+| +getStatus()   |
+| +getReason()   |
++----------------+
+
++----------------+
+|  OrderStatus   |
++----------------+
+| SUCCESS        |
+| FAILED         |
++----------------+
+
